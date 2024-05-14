@@ -1,110 +1,153 @@
 import math
+
+
 class Vector:
-    
-    def __init__(self,x,y,z):
+
+    def __init__(self, x, y, z):
         self.x = x
         self.y = y
         self.z = z
-    def __add__(self,other):
-        return Vector(self.x+other.x,self.y+other.y,self.z+other.z)
-    def __sub__(self,other):
-        return Vector(self.x-other.x,self.y-other.y,self.z-other.z)
-    def __mul__(self,other):
-        return Vector(self.x*other.x,self.y*other.y,self.z*other.z)
-    def __truediv__(self,other):
-        return Vector(self.x/other.x,self.y/other.y,self.z/other.z)
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __sub__(self, other):
+        return Vector(self.x - other.x, self.y - other.y, self.z - other.z)
+
+    def __mul__(self, other):
+        return Vector(self.x * other.x, self.y * other.y, self.z * other.z)
+
+    def __truediv__(self, other):
+        return Vector(self.x / other.x, self.y / other.y, self.z / other.z)
+
     def __str__(self):
         return f"Vector({self.x},{self.y},{self.z})"
-    def scalar(self,other):
-        return self.x*other.x+self.y*other.y+self.z*other.z
-    def cross(self,other):
-        return Vector(self.y*other.z-self.z*other.y,self.z*other.x-self.x*other.z,self.x*other.y-self.y*other.x)
+
+    def scalar(self, other):
+        return self.x * other.x + self.y * other.y + self.z * other.z
+
+    def cross(self, other):
+        return Vector(self.y * other.z - self.z * other.y, self.z * other.x - self.x * other.z,
+                      self.x * other.y - self.y * other.x)
+
     def __repr__(self):
         return f"Vector({self.x},{self.y},{self.z})"
-    def __eq__(self,other):
+
+    def __eq__(self, other):
         return self.x == other.x and self.y == other.y and self.z == other.z
-    def __ne__(self,other):
+
+    def __ne__(self, other):
         return not self.__eq__(other)
-    def __lt__(self,other):
+
+    def __lt__(self, other):
         return self.x < other.x and self.y < other.y and self.z < other.z
-    def __le__(self,other):
+
+    def __le__(self, other):
         return self.x <= other.x and self.y <= other.y and self.z <= other.z
-    def __gt__(self,other):
+
+    def __gt__(self, other):
         return self.x > other.x and self.y > other.y and self.z > other.z
-    def __ge__(self,other):
+
+    def __ge__(self, other):
         return self.x >= other.x and self.y >= other.y and self.z >= other.z
+
     def __neg__(self):
-        return Vector(-self.x,-self.y,-self.z)
+        return Vector(-self.x, -self.y, -self.z)
+
     def __pos__(self):
-        return Vector(+self.x,+self.y,+self.z)
+        return Vector(+self.x, +self.y, +self.z)
+
     def __abs__(self):
-        return Vector(abs(self.x),abs(self.y),abs(self.z))
+        return Vector(abs(self.x), abs(self.y), abs(self.z))
+
     def __invert__(self):
-        return Vector(~self.x,~self.y,~self.z)
-    def __round__(self,n):
-        return Vector(round(self.x,n),round(self.y,n),round(self.z,n))
+        return Vector(~self.x, ~self.y, ~self.z)
+
+    def __round__(self, n):
+        return Vector(round(self.x, n), round(self.y, n), round(self.z, n))
+
     def __floor__(self):
-        return Vector(math.floor(self.x),math.floor(self.y),math.floor(self.z))
+        return Vector(math.floor(self.x), math.floor(self.y), math.floor(self.z))
+
     def __ceil__(self):
-        return Vector(math.ceil(self.x),math.ceil(self.y),math.ceil(self.z))
+        return Vector(math.ceil(self.x), math.ceil(self.y), math.ceil(self.z))
+
     def __trunc__(self):
-        return Vector(math.trunc(self.x),math.trunc(self.y),math.trunc(self.z))
-    """
-    A class to represent a 3-dimensional vector and perform vector operations.
+        return Vector(math.trunc(self.x), math.trunc(self.y), math.trunc(self.z))
 
-    Attributes:
-    x (float): The x-coordinate of the vector.
-    y (float): The y-coordinate of the vector.
-    z (float): The z-coordinate of the vector.
+    # Triple product
+    def triple_product(self, other, another):
+        return self.scalar(other.cross(another))
 
-    Methods:
-    __init__(self, x, y, z):
-        Initializes a Vector object with the given x, y, and z coordinates.
-    __add__(self, other):
-        Adds two vectors element-wise and returns the resulting vector.
-    __sub__(self, other):
-        Subtracts one vector from another element-wise and returns the resulting vector.
-    __mul__(self, other):
-        Multiplies two vectors element-wise and returns the resulting vector.
-    __truediv__(self, other):
-        Divides one vector by another element-wise and returns the resulting vector.
-    __str__(self):
-        Returns a string representation of the vector in the format "Vector(x, y, z)".
-    scalar(self, other):
-        Computes the scalar (dot) product of two vectors and returns the result.
-    cross(self, other):
-        Computes the cross product of two vectors and returns the resulting vector.
-    __repr__(self):
-        Returns a string representation of the vector suitable for reproduction of the object.
-    __eq__(self, other):
-        Checks if two vectors are equal.
-    __ne__(self, other):
-        Checks if two vectors are not equal.
-    __lt__(self, other):
-        Checks if all components of self are less than corresponding components of other.
-    __le__(self, other):
-        Checks if all components of self are less than or equal to corresponding components of other.
-    __gt__(self, other):
-        Checks if all components of self are greater than corresponding components of other.
-    __ge__(self, other):
-        Checks if all components of self are greater than or equal to corresponding components of other.
-    __neg__(self):
-        Returns the negation of the vector.
-    __pos__(self):
-        Returns the vector unchanged.
-    __abs__(self):
-        Returns a vector with the absolute values of each component.
-    __invert__(self):
-        Returns a vector with bitwise inversion of each component.
-    __round__(self, n):
-        Returns a vector with each component rounded to the nearest multiple of 10**(-n).
-    __floor__(self):
-        Returns a vector with each component rounded down to the nearest integer.
-    __ceil__(self):
-        Returns a vector with each component rounded up to the nearest integer.
-    __trunc__(self):
-        Returns a vector with each component truncated to the nearest integer towards zero.
-    """
+    # Scalar projection
+    def scalar_projection(self, other):
+        return self.scalar(other) / math.sqrt(other.scalar(other))
 
+    # Vector projection
+    def vector_projection(self, other):
+        return other * (self.scalar(other) / other.scalar(other))
 
- 
+    # Angle between vectors
+    def angle(self, other):
+        return math.acos(self.scalar(other) / (math.sqrt(self.scalar(self)) * math.sqrt(other.scalar(other))))
+
+    # Area of parallelogram
+    def area_parallelogram(self, other):
+        return self.cross(other).scalar(self.cross(other))
+
+    # Area of triangle
+    def area_triangle(self, other):
+        return 0.5 * self.cross(other).scalar(self.cross(other))
+
+    # Volume of parallelepiped
+    def volume_parallelepiped(self, other, another):
+        return self.scalar(other.cross(another))
+
+    # Volume of tetrahedron
+    def volume_tetrahedron(self, other, another):
+        return abs(self.scalar(other.cross(another))) / 6
+
+    # Distance between vectors
+    def distance(self, other):
+        return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2 + (self.z - other.z) ** 2)
+
+    # Midpoint of vectors
+    def midpoint(self, other):
+        return Vector((self.x + other.x) / 2, (self.y + other.y) / 2, (self.z + other.z) / 2)
+
+    # Unit vector
+    def unit_vector(self):
+        return self / math.sqrt(self.scalar(self))
+
+    # Perpendicular vector
+    def perpendicular_vector(self):
+        return Vector(-self.y, self.x, 0)
+
+    # Projection of vector
+    def projection(self):
+        return self.scalar(self) / self.scalar(self)
+
+    # Rotation of vector
+    def rotation(self, angle):
+        return Vector(self.x * math.cos(angle) - self.y * math.sin(angle),
+                      self.x * math.sin(angle) + self.y * math.cos(angle), self.z)
+
+    # Reflection of vector
+    def reflection(self):
+        return Vector(-self.x, -self.y, -self.z)
+
+    # Vector components
+    def components(self):
+        return [self.x, self.y, self.z]
+
+    # Vector magnitude
+    def magnitude(self):
+        return math.sqrt(self.scalar(self))
+
+    # Vector direction
+    def direction(self):
+        return [self.x / self.magnitude(), self.y / self.magnitude(), self.z / self.magnitude()]
+
+    # Vector normalization
+    def normalize(self):
+        return Vector(self.x / self.magnitude(), self.y / self.magnitude(), self.z / self.magnitude())
